@@ -1,0 +1,41 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: infra
+  namespace: argocd
+spec:
+  generators:
+    # Generator 1: Applications
+    - list:
+        elements:
+          - app: metrics-server
+            repoURL: https://kubernetes-sigs.github.io/metrics-server
+            chart: metrics-server
+            version: 3.13.0
+            namespace: kube-system
+  template:
+    metadata:
+      name: '{{app}}'
+    spec:
+      project: default
+      sources:
+        # Source 1: Helm chart
+        - repoURL: '{{repoURL}}'
+          chart: '{{chart}}'
+          targetRevision: '{{version}}'
+          helm:
+            valueFiles:
+              - '$values/infra/apps/{{app}}/values.yaml'
+        # Source 2: Git repo com values
+        - repoURL: git@github.com:ifnazar/liferay-argocd.git
+          targetRevision: main
+          ref: values
+      destination:
+        server: https://kubernetes.default.svc
+        namespace: '{{namespace}}'
+      syncPolicy:
+        automated:
+          prune: true
+          selfHeal: true
+        syncOptions:
+          - CreateNamespace=true
