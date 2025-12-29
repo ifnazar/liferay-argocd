@@ -5,30 +5,39 @@ metadata:
   namespace: argocd
 spec:
   generators:
-    - list:
-        elements:
-          - app: nginx
-            repoURL: https://kubernetes.github.io/ingress-nginx
-            chart: ingress-nginx 
-            version: 4.10.1
-    - list:
-      elements:
-        - env: dev1
-        - env: dev2
-        - env: dev3           
+     - matrix:
+        generators:
+          # Generator 1: Applications
+          - list:
+              elements:
+                - app: nginx
+                  repoURL: https://kubernetes.github.io/ingress-nginx
+                  chart: ingress-nginx
+                  version: 4.10.1
 
+          # Generator 2: Environments
+          - list:
+              elements:
+                - env: dev1
+                - env: dev2
+                - env: dev3
   template:
     metadata:
-      name: '{{app}}-{{env}}'
+      name: '{{env}}'
     spec:
       project: default
-      source:
-        repoURL: '{{repoURL}}'
-        chart: '{{chart}}'
-        targetRevision: '{{version}}'
-        helm:
-          valueFiles:
-            - 'apps/{{app}}/values-{{env}}.yaml'
+      sources:
+        # Source 1: Helm chart
+        - repoURL: '{{repoURL}}'
+          chart: '{{chart}}'
+          targetRevision: '{{version}}'
+          helm:
+            valueFiles:
+              - '$values/apps/{{app}}/values-{{env}}.yaml'
+        # Source 2: Git repo com values
+        - repoURL: git@github.com:ifnazar/liferay-argocd.git
+          targetRevision: main
+          ref: values
       destination:
         server: https://kubernetes.default.svc
         namespace: '{{env}}'
