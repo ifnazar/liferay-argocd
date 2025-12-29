@@ -1,0 +1,12 @@
+controller:
+  replicaCount: 2
+  allowSnippetAnnotations: true
+  ingressClassResource:
+    default: false
+    name: nginx-dev1
+    controllerValue: k8s.io/ingress-nginx-dev1
+  service:
+    type: ClusterIP
+  scope:
+    enabled: true
+    namespace: dev1
