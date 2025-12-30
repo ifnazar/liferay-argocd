@@ -13,6 +13,11 @@ spec:
             chart: metrics-server
             version: 3.13.0
             namespace: kube-system
+          - app: eck-operator
+            repoURL: https://helm.elastic.co
+            chart: eck-operator
+            version: 2.12.1
+            namespace: elastic-system
   template:
     metadata:
       name: '{{app}}'
