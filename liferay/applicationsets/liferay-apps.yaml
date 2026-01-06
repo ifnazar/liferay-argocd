@@ -12,7 +12,7 @@ spec:
           - path: liferay/apps/*/environments/*
   template:
     metadata:
-      name: '{{path[2]}}-{{path[4]}}'
+      name: '{{path[4]}}-{{path[2]}}'
       annotations:
         argocd.argoproj.io/sync-wave: |
           {{- if eq path[2] "nginx" -}}0
