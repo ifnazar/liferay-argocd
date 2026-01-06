@@ -4,5 +4,4 @@ helmCharts:
     version: 22.4.0
     releaseName: nginx
     namespace: dev3
-    includeCRDs: true
     valuesFile: values.yaml
