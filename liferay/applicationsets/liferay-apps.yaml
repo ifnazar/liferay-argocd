@@ -29,7 +29,7 @@ spec:
 
       destination:
         server: https://kubernetes.default.svc
-        namespace: 'dev1'
+        namespace: '{{path[4]}}'
 
       syncPolicy:
         automated:
