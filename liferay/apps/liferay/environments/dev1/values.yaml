@@ -1,0 +1,12 @@
+controller:
+  kind: Deployment
+  replicaCount: 1
+
+  metrics:
+    enabled: false
+
+  service:
+    type: LoadBalancer
+
+  admissionWebhooks:
+    enabled: false

@@ -1,5 +1,0 @@
-controller:
-  replicaCount: 4
-  allowSnippetAnnotations: true
-  service:
-    type: ClusterIP

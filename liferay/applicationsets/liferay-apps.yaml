@@ -15,9 +15,9 @@ spec:
       name: '{{path[4]}}-{{path[2]}}'
       annotations:
         argocd.argoproj.io/sync-wave: |
-          {{- if eq path[2] "nginx" -}}0
-          {{- else if eq path[2] "elasticsearch" -}}1
-          {{- else if eq path[2] "liferay" -}}2
+          {{- if eq path[2] "nginx" -}}30
+          {{- else if eq path[2] "elasticsearch" -}}20
+          {{- else if eq path[2] "liferay" -}}10
           {{- end }}
     spec:
       project: default

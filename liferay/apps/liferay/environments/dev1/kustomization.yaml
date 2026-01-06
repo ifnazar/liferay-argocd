@@ -1,0 +1,9 @@
+helmCharts:
+  - name: ingress-nginx
+    repo: https://kubernetes.github.io/ingress-nginx  
+    releaseName: dev1-ingress-nginx
+    namespace: dev1
+    version: 4.10.1
+    valuesFile: values.yaml
+    additionalValuesFiles:
+    - ../../common/values.yaml
