@@ -5,3 +5,5 @@ helmCharts:
     namespace: dev1
     version: 4.10.1
     valuesFile: values.yaml
+    additionalValuesFiles:
+    - ../../common/values.yaml
