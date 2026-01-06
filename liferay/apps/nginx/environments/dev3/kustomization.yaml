@@ -3,5 +3,7 @@ resources:
 
 helmCharts:
   - name: ingress-nginx
+    releaseName: dev3-ingress-nginx
+    namespace: dev3
     version: 4.10.1
     valuesFile: values.yaml
