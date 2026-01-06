@@ -1,6 +1,3 @@
-resources:
-  - ../../common
-
 helmCharts:
   - name: ingress-nginx
     repo: https://kubernetes.github.io/ingress-nginx  
