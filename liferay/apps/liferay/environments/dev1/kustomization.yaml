@@ -1,7 +1,7 @@
 helmCharts:
   - name: liferay
     repo: https://kubernetes.github.io/ingress-nginx
-    version: 4.14.1
+    version: 4.9.0
     releaseName: ingress-nginx
     namespace: dev1
     includeCRDs: true
