@@ -1,0 +1,8 @@
+controller:
+  ingressClassResource:
+    default: false
+    name: nginx-dev1
+    controllerValue: k8s.io/ingress-nginx-dev1
+  scope:
+    enabled: true
+    namespace: dev1

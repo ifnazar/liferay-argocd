@@ -1,0 +1,37 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: liferay-apps
+  namespace: argocd
+spec:
+  generators:
+    - git:
+        repoURL: https://github.com/ifnazar/liferay-argocd.git
+        revision: v2
+        directories:
+          - path: liferay/apps/*/environments/*
+  template:
+    metadata:
+      name: '{{path[1]}}-{{path[3]}}'
+      annotations:
+        argocd.argoproj.io/sync-wave: |
+          {{- if eq path[1] "nginx" -}}0
+          {{- else if eq path[1] "elasticsearch" -}}1
+          {{- else if eq path[1] "liferay" -}}2
+          {{- end }}
+    spec:
+      project: default
+
+      source:
+        repoURL: https://github.com/ifnazar/liferay-argocd.git
+        targetRevision: v2
+        path: '{{path}}'
+
+      destination:
+        server: https://kubernetes.default.svc
+        namespace: '{{path[1]}}-{{path[3]}}'
+
+      syncPolicy:
+        automated:
+          prune: true
+          selfHeal: true
