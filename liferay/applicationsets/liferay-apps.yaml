@@ -6,7 +6,7 @@ metadata:
 spec:
   generators:
     - git:
-        repoURL: https://github.com/ifnazar/liferay-argocd.git
+        repoURL: git@github.com:ifnazar/liferay-argocd.git
         revision: v2
         directories:
           - path: liferay/apps/*/environments/*
@@ -23,7 +23,7 @@ spec:
       project: default
 
       source:
-        repoURL: https://github.com/ifnazar/liferay-argocd.git
+        repoURL: git@github.com:ifnazar/liferay-argocd.git
         targetRevision: v2
         path: '{{path}}'
 
