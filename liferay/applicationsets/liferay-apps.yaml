@@ -12,12 +12,12 @@ spec:
           - path: liferay/apps/*/environments/*
   template:
     metadata:
-      name: '{{path[1]}}-{{path[3]}}'
+      name: '{{path[2]}}-{{path[4]}}'
       annotations:
         argocd.argoproj.io/sync-wave: |
-          {{- if eq path[1] "nginx" -}}0
-          {{- else if eq path[1] "elasticsearch" -}}1
-          {{- else if eq path[1] "liferay" -}}2
+          {{- if eq path[2] "nginx" -}}0
+          {{- else if eq path[2] "elasticsearch" -}}1
+          {{- else if eq path[2] "liferay" -}}2
           {{- end }}
     spec:
       project: default
